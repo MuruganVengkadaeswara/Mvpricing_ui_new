@@ -33,9 +33,7 @@ const UpdateProductService = props => {
       .catch(res => {
         setAlert(<Alert variant="danger">Unable to fetch the product</Alert>);
       });
-  }, []);
 
-  useEffect(() => {
     serviceDataService
       .getAllServices(res => {
         console.log(res.data.response);
@@ -45,7 +43,7 @@ const UpdateProductService = props => {
       .catch(res => {
         console.log("Unable to fetch services");
       });
-  });
+  }, []);
 
   const deleteService = id => {
     console.log(id);
