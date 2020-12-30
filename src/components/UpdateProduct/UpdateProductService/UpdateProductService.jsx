@@ -45,7 +45,7 @@ const UpdateProductService = props => {
       .catch(res => {
         console.log("Unable to fetch services");
       });
-  }, [click]);
+  });
 
   const deleteService = id => {
     console.log(id);
