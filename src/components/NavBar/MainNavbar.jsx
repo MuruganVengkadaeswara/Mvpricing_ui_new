@@ -20,6 +20,8 @@ import AllBundles from "../AllBundles/AllBundles";
 import AllPlans from "../AllPlans/AllPlans";
 import UpdateProduct from "../UpdateProduct/UpdateProduct";
 import HomeContents from "../HomeContents/HomeContents";
+import UpdateProductService from "../UpdateProduct/UpdateProductService/UpdateProductService";
+import UpdateAdditionalPrice from "../UpdateProduct/UpdateAdditionalPrice/UpdateAdditionalPrice";
 
 const navs = [
   {
@@ -128,6 +130,8 @@ const MainNavbar = props => {
       <Route path="/Allbundles" component={AllBundles}></Route>
       <Route path="/allplans" component={AllPlans}></Route>
       <Route path="/updateproduct" component={UpdateProduct}></Route>
+      <Route path="/updateproduct" component={UpdateProductService}></Route>
+      <Route path="/updateproduct" component={UpdateAdditionalPrice}></Route>
     </Router>
   );
 };

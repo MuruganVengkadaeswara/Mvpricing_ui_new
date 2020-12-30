@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import ProductDataService from "../Services/ProductDataService";
-import { Tab, Table, Form, Button } from "react-bootstrap";
+import { Tab, Table, Form, Button, Alert } from "react-bootstrap";
 
 const UpdateProduct = props => {
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState({
+    price: { price: "" }
+  });
   const [bool, setBool] = useState(0);
   const [price, setPrice] = useState({
     productId: "",
-    price: ""
+    price: "",
+    prodPriceId: ""
   });
+  const [alert, setAlert] = useState();
 
   let id = props.location.id;
   useEffect(() => {
@@ -20,7 +24,11 @@ const UpdateProduct = props => {
 
           setProduct(res.data.response);
           setPrice(prevState => {
-            return { ...prevState, productId: res.data.response.productId };
+            return {
+              ...prevState,
+              productId: res.data.response.productId,
+              prodPriceId: res.data.response.price.prodPriceId
+            };
           });
           console.log(product);
           setBool(1);
@@ -33,23 +41,40 @@ const UpdateProduct = props => {
 
   const updatePrice = () => {
     console.log(price);
+
+    ProductDataService.updateProductPrice(price)
+      .then(res => {
+        if (res.data.error) {
+          setAlert(<Alert variant="danger">Unable to update price</Alert>);
+        } else {
+          setAlert(<Alert variant="success">Price updated successfully</Alert>);
+          console.log(res.data);
+
+          setTimeout(() => {
+            props.history.push("/products");
+          }, 1000);
+        }
+      })
+      .catch(res => {
+        setAlert(<Alert variant="danger">{res.response.data.response}</Alert>);
+      });
   };
 
   return (
     <div className="card card-body offset-md-2 col-md-8 mt-5">
-      <h1>Update Product</h1>
+      <h2>Update Product</h2>
+      <hr></hr>
+      {alert}
+      <h4>Product id : {product.productId}</h4>
+      <br></br>
+      <br></br>
+      <h4>Product Name : {product.productName}</h4>
       <hr></hr>
       <Form>
         <Form.Group>
-          <Form.Label>Product id : {product.productId}</Form.Label>
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Product Name : {product.productName}</Form.Label>
-        </Form.Group>
-        <Form.Group>
           <Form.Label>Product Price :</Form.Label>
           <Form.Control
-            // defaultValue={product.price.price}
+            defaultValue={product.price.price}
             type="number"
             onChange={e => {
               const val = e.target.value;
