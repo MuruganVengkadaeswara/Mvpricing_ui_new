@@ -2,35 +2,38 @@ import React, { useEffect, useState } from "react";
 import { Table, Button, Alert } from "react-bootstrap";
 import serviceDataService from "../Services/ServiceDataService";
 
-const AllServices = props => {
+const AllServices = (props) => {
   const [services, SetServices] = useState([]);
   const [alert, setAlert] = useState();
 
   useEffect(() => {
     serviceDataService
       .getAllServices()
-      .then(res => {
-        SetServices(res.data.response);
+      .then((res) => {
+        if (!res.data.error) {
+          SetServices(res.data.response);
+        }
+        else{
+          setAlert(<Alert variant="danger">unable to connect</Alert>)
+        }
       })
-      .catch(res => {
+      .catch((res) => {
         if (res.response != undefined) {
           setAlert(
             <Alert variant="danger">{res.response.data.response}</Alert>
           );
-        } else {
-          setAlert(<Alert variant="danger">Unable to connect</Alert>);
         }
       });
   }, [alert]);
 
-  const deleteService = id => {
+  const deleteService = (id) => {
     serviceDataService
       .deleteServiceById(id)
-      .then(res => {
+      .then((res) => {
         console.log(res.data);
         setAlert(<Alert variant="success">Deleted successfully</Alert>);
       })
-      .catch(res => {
+      .catch((res) => {
         setAlert(<Alert variant="danger">{res.response.data.response}</Alert>);
       });
   };
@@ -53,7 +56,7 @@ const AllServices = props => {
           </tr>
         </thead>
         <tbody>
-          {services.map(service => {
+          {services.map((service) => {
             return (
               <tr key={service.serviceId}>
                 <td>

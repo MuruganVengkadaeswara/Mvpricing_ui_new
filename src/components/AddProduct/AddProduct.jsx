@@ -164,6 +164,8 @@ const AddProduct = props => {
     serviceDataService.getAllServices().then(res => {
       console.log(res.data);
       setServices(res.data.response);
+    }).catch((res)=>{
+      setAlert(<Alert variant="danger">unable to connect</Alert>)
     });
   }, []);
 

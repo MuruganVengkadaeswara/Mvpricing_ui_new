@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import productDataService from "/home/onebill/Desktop/onebill_pricing_ui_new/onebill_pricing_ui/src/components/Services/ProductDataService.js";
-import serviceDataService from "/home/onebill/Desktop/onebill_pricing_ui_new/onebill_pricing_ui/src/components/Services/ServiceDataService.js";
+import productDataService from "/home/mv/Desktop/onebillpricing_ui_new/src/components/Services/ProductDataService";
+import serviceDataService from "/home/mv/Desktop/onebillpricing_ui_new/src/components/Services/ServiceDataService.js";
 
 import { Alert, Table, Button, Form, Col } from "react-bootstrap";
-import ServiceDataService from "/home/onebill/Desktop/onebill_pricing_ui_new/onebill_pricing_ui/src/components/Services/ServiceDataService.js";
 
 const UpdateProductService = props => {
   const [product, setProduct] = useState({

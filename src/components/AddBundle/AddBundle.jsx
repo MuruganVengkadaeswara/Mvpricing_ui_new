@@ -14,10 +14,15 @@ const AddBundle = (props) => {
   const [prod, setProd] = useState(0);
 
   useEffect(() => {
-    productDataService.getAllProducts().then((res) => {
-      console.log(products);
-      Setproducts(res.data.response);
-    });
+    productDataService
+      .getAllProducts()
+      .then((res) => {
+        console.log(products);
+        Setproducts(res.data.response);
+      })
+      .catch((res) => {
+        setAlert(<Alert variant="danger">unable to connect</Alert>);
+      });
   }, []);
 
   const addBundle = (e) => {
@@ -96,7 +101,9 @@ const AddBundle = (props) => {
           >
             {products.map((product) => {
               return (
-                <option key={product.productId} value={product.productId}>{product.productName}</option>
+                <option key={product.productId} value={product.productId}>
+                  {product.productName}
+                </option>
               );
             })}
           </Form.Control>

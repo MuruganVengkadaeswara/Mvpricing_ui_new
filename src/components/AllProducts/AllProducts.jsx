@@ -2,37 +2,35 @@ import React, { useState, useEffect } from "react";
 import { Table, Button, Alert } from "react-bootstrap";
 import ProductDataService from "../Services/ProductDataService";
 
-const AllProducts = props => {
+const AllProducts = (props) => {
   const [products, setProducts] = useState([]);
   const [alert, setAlert] = useState();
 
   useEffect(() => {
     ProductDataService.getAllProducts()
-      .then(res => {
+      .then((res) => {
         console.log(res.data);
         setProducts(res.data.response);
       })
-      .catch(res => {
+      .catch((res) => {
         if (res.response != undefined) {
           setAlert(
             <Alert variant="danger">{res.response.data.response}</Alert>
           );
-        } else {
-          setAlert(<Alert variant="danger">Unable to Connect</Alert>);
         }
       });
   }, [alert]);
 
-  const deleteProduct = id => {
+  const deleteProduct = (id) => {
     ProductDataService.deleteProductById(id)
-      .then(res => {
+      .then((res) => {
         if (!res.data.error) {
           setAlert(
             <Alert variant="success">Product Deleted Successfully</Alert>
           );
         }
       })
-      .catch(res => {
+      .catch((res) => {
         setAlert(<Alert variant="danger">{res.response.data.response}</Alert>);
       });
   };
@@ -57,14 +55,14 @@ const AllProducts = props => {
           </tr>
         </thead>
         <tbody>
-          {products.map(product => {
+          {products.map((product) => {
             return (
               <tr key={product.productId}>
                 <td>{product.productId}</td>
                 <td>{product.productName}</td>
                 <td>&#8377; {product.price.price} </td>
                 <td>
-                  {product.services.map(s => {
+                  {product.services.map((s) => {
                     return (
                       <h6 key={s.serviceId}>
                         {s.service.serviceName} @ {s.servicePrice} &#8377; /{" "}
@@ -75,7 +73,7 @@ const AllProducts = props => {
                   })}
                 </td>
                 <td>
-                  {product.additionalPrices.map(price => {
+                  {product.additionalPrices.map((price) => {
                     return (
                       <h6>
                         {price.description} @ {price.price} &#8377;
@@ -89,7 +87,7 @@ const AllProducts = props => {
                     onClick={() => {
                       props.history.push({
                         pathname: "/updateproduct",
-                        id: product.productId
+                        id: product.productId,
                       });
                     }}
                   >

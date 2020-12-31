@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import axios from "axios";
-import productDataService from "/home/onebill/Desktop/onebill_pricing_ui_new/onebill_pricing_ui/src/components/Services/ProductDataService.js";
-import PlanDataService from "/home/onebill/Desktop/onebill_pricing_ui_new/onebill_pricing_ui/src/components/Services/PlanDataService.js"
+import productDataService from "/home/mv/Desktop/onebillpricing_ui_new/src/components/Services/ProductDataService.js";
+import PlanDataService from "/home/mv/Desktop/onebillpricing_ui_new/src/components/Services/PlanDataService.js";
 const AddPlanExistingProduct = (props) => {
   const [plan, setPlan] = useState();
   const [products, setProducts] = useState([]);
   const [alert, setAlert] = useState();
 
   useEffect(() => {
-    productDataService.getAllProducts().then((res) => {
-      setProducts(res.data.response);
-    });
+    productDataService
+      .getAllProducts()
+      .then((res) => {
+        setProducts(res.data.response);
+      })
+      .catch((res) => {
+        setAlert(<Alert variant="danger">unable to connect</Alert>);
+      });
   }, []);
 
   const addPlan = (e) => {
@@ -19,7 +24,7 @@ const AddPlanExistingProduct = (props) => {
     console.log(plan);
     PlanDataService.addPlan(plan)
       .then((res) => {
-        setAlert(<Alert variant="success">Plan Added Successfully</Alert>)
+        setAlert(<Alert variant="success">Plan Added Successfully</Alert>);
       })
       .catch((res) => {
         setAlert(<Alert variant="danger">Unable to add plan</Alert>);
@@ -83,7 +88,7 @@ const AddPlanExistingProduct = (props) => {
                 });
               }}
             >
-            <option disabled>Select</option>
+              <option disabled>Select</option>
               {products.map((product) => {
                 return (
                   <option value={product.productId}>

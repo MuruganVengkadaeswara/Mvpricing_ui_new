@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Col, Alert } from "react-bootstrap";
-import serviceDataService from "/home/onebill/Desktop/onebill_pricing_ui_new/onebill_pricing_ui/src/components/Services/ServiceDataService.js";
-import planDataService from "/home/onebill/Desktop/onebill_pricing_ui_new/onebill_pricing_ui/src/components/Services/PlanDataService.js";
+import serviceDataService from "/home/mv/Desktop/onebillpricing_ui_new/src/components/Services/ServiceDataService.js";
+import planDataService from "/home/mv/Desktop/onebillpricing_ui_new/src/components/Services/PlanDataService.js";
 
-const AddPlanNew = props => {
+const AddPlanNew = (props) => {
   const [services, setServices] = useState([]);
   const [product, setProduct] = useState({
     productName: "",
     price: {
-      price: ""
+      price: "",
     },
     additionalPrices: [],
-    services: []
+    services: [],
   });
   const [plan, setPlan] = useState({
     planName: "",
     planType: "",
-    product: {}
+    product: {},
   });
   const [serv, setServ] = useState({});
   const [addl, setAddl] = useState({});
@@ -25,36 +25,36 @@ const AddPlanNew = props => {
   useEffect(() => {
     serviceDataService
       .getAllServices()
-      .then(res => {
+      .then((res) => {
         setServices(res.data.response);
       })
-      .catch(res => {
-        console.log(res);
+      .catch((res) => {
+        setAlert(<Alert variant="danger">unable to connect</Alert>);
       });
   }, []);
 
-  const addPlan = e => {
+  const addPlan = (e) => {
     e.preventDefault();
-    setPlan(prevState => {
+    setPlan((prevState) => {
       return { ...prevState, product: product };
     });
     planDataService
       .addPlan(plan)
-      .then(res => {
+      .then((res) => {
         if (!res.data.error) {
           setAlert(<Alert variant="success">Plan Added successfully</Alert>);
           window.scrollTo({
             top: 0,
-            behavior: "smooth"
+            behavior: "smooth",
           });
           document.planform.reset();
         }
       })
-      .catch(res => {
+      .catch((res) => {
         setAlert(<Alert variant="danger">{res.response.data.response}</Alert>);
         window.scrollTo({
           top: 0,
-          behavior: "smooth"
+          behavior: "smooth",
         });
       });
   };
@@ -74,14 +74,14 @@ const AddPlanNew = props => {
               </Form.Label>
               <Form.Control
                 as="select"
-                onChange={e => {
+                onChange={(e) => {
                   const val = e.target.value;
-                  setServ(prevState => {
+                  setServ((prevState) => {
                     return { ...prevState, serviceId: val };
                   });
                 }}
               >
-                {services.map(service => {
+                {services.map((service) => {
                   return (
                     <option value={service.serviceId}>
                       {service.serviceName}
@@ -96,9 +96,9 @@ const AddPlanNew = props => {
               </Form.Label>
               <Form.Control
                 type="number"
-                onChange={e => {
+                onChange={(e) => {
                   const val = e.target.value;
-                  setServ(prevState => {
+                  setServ((prevState) => {
                     return { ...prevState, servicePrice: val };
                   });
                 }}
@@ -112,9 +112,9 @@ const AddPlanNew = props => {
               </Form.Label>
               <Form.Control
                 type="number"
-                onChange={e => {
+                onChange={(e) => {
                   const val = e.target.value;
-                  setServ(prevState => {
+                  setServ((prevState) => {
                     return { ...prevState, freeUnits: val };
                   });
                 }}
@@ -126,9 +126,9 @@ const AddPlanNew = props => {
               </Form.Label>
               <Form.Control
                 type="text"
-                onChange={e => {
+                onChange={(e) => {
                   const val = e.target.value;
-                  setServ(prevState => {
+                  setServ((prevState) => {
                     return { ...prevState, unitType: val };
                   });
                 }}
@@ -141,7 +141,7 @@ const AddPlanNew = props => {
         style={{
           backgroundColor: "#FF9B714C",
           color: "#2E2F2F",
-          fontWeight: "bold"
+          fontWeight: "bold",
         }}
       >
         Please Add as many services as you want
@@ -164,9 +164,9 @@ const AddPlanNew = props => {
               </Form.Label>
               <Form.Control
                 type="number"
-                onChange={e => {
+                onChange={(e) => {
                   const val = e.target.value;
-                  setAddl(prevState => {
+                  setAddl((prevState) => {
                     return { ...prevState, price: val };
                   });
                 }}
@@ -179,9 +179,9 @@ const AddPlanNew = props => {
             </Form.Label>
             <Form.Control
               type="text"
-              onChange={e => {
+              onChange={(e) => {
                 const val = e.target.value;
-                setAddl(prevState => {
+                setAddl((prevState) => {
                   return { ...prevState, description: val };
                 });
               }}
@@ -193,7 +193,7 @@ const AddPlanNew = props => {
         style={{
           backgroundColor: "#FF9B714C",
           color: "#2E2F2F",
-          fontWeight: "bold"
+          fontWeight: "bold",
         }}
       >
         Please Add as many additional prices as you want
@@ -215,9 +215,9 @@ const AddPlanNew = props => {
           </Form.Label>
           <Form.Control
             type="text"
-            onChange={e => {
+            onChange={(e) => {
               const val = e.target.value;
-              setPlan(prevState => {
+              setPlan((prevState) => {
                 return { ...prevState, planName: val };
               });
             }}
@@ -230,9 +230,9 @@ const AddPlanNew = props => {
           <Form.Control
             as="select"
             defaultValue="select"
-            onChange={e => {
+            onChange={(e) => {
               const val = e.target.value;
-              setPlan(prevState => {
+              setPlan((prevState) => {
                 return { ...prevState, planType: val };
               });
             }}
@@ -252,9 +252,9 @@ const AddPlanNew = props => {
           </Form.Label>
           <Form.Control
             type="text"
-            onChange={e => {
+            onChange={(e) => {
               const val = e.target.value;
-              setProduct(prevState => {
+              setProduct((prevState) => {
                 return { ...prevState, productName: val };
               });
             }}
@@ -266,21 +266,21 @@ const AddPlanNew = props => {
           </Form.Label>
           <Form.Control
             type="number"
-            onChange={e => {
+            onChange={(e) => {
               const val = e.target.value;
-              setProduct(prevState => {
+              setProduct((prevState) => {
                 return { ...prevState, price: { price: val } };
               });
             }}
           ></Form.Control>
         </Form.Group>
         {Servi}
-        {product.services.map(service => {
+        {product.services.map((service) => {
           let name;
           if (
-            services.find(o => o.serviceId == service.serviceId) != undefined
+            services.find((o) => o.serviceId == service.serviceId) != undefined
           ) {
-            name = services.find(o => o.serviceId == service.serviceId)
+            name = services.find((o) => o.serviceId == service.serviceId)
               .serviceName;
           }
 
@@ -303,10 +303,10 @@ const AddPlanNew = props => {
               serv.freeUnits != null &&
               serv.unitType
             ) {
-              setProduct(prevState => {
+              setProduct((prevState) => {
                 return {
                   ...prevState,
-                  services: [...prevState.services, serv]
+                  services: [...prevState.services, serv],
                 };
               });
               setServ([]);
@@ -319,7 +319,7 @@ const AddPlanNew = props => {
         </Button>
         <hr></hr>
         {addlp}
-        {product.additionalPrices.map(price => {
+        {product.additionalPrices.map((price) => {
           return (
             <div className="card card-body mb-3">
               <Alert variant="info">
@@ -333,10 +333,10 @@ const AddPlanNew = props => {
           variant="info"
           onClick={() => {
             if (addl.description != null && addl.price != null) {
-              setProduct(prevState => {
+              setProduct((prevState) => {
                 return {
                   ...prevState,
-                  additionalPrices: [...prevState.additionalPrices, addl]
+                  additionalPrices: [...prevState.additionalPrices, addl],
                 };
               });
               document.addlPriceForm.reset();
@@ -353,7 +353,7 @@ const AddPlanNew = props => {
           variant="success"
           type="submit"
           onClick={() => {
-            setPlan(prevState => {
+            setPlan((prevState) => {
               return { ...prevState, product: product };
             });
           }}
