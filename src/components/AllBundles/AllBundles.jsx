@@ -2,19 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Table, Alert, Button } from "react-bootstrap";
 import bundleDataService from "../Services/BundleDataService";
 
-const AllBundles = (props) => {
+const AllBundles = props => {
   const [bundles, setBundles] = useState([]);
   const [alert, setAlert] = useState();
 
   useEffect(() => {
     bundleDataService
       .getAllBundles()
-      .then((res) => {
+      .then(res => {
         if (!res.data.error) {
           setBundles(res.data.response);
         }
       })
-      .catch((res) => {
+      .catch(res => {
         if (res.response != undefined) {
           setAlert(
             <Alert variant="danger">{res.response.data.response}</Alert>
@@ -23,17 +23,17 @@ const AllBundles = (props) => {
       });
   }, [alert]);
 
-  const deleteBundle = (id) => {
+  const deleteBundle = id => {
     bundleDataService
       .deleteBundleById(id)
-      .then((res) => {
+      .then(res => {
         if (!res.data.error) {
           setAlert(
             <Alert variant="success">Bundle Deleted Successfully</Alert>
           );
         }
       })
-      .catch((res) => {
+      .catch(res => {
         setAlert(<Alert variant="danger">{res.response.data.response}</Alert>);
       });
   };
@@ -55,18 +55,28 @@ const AllBundles = (props) => {
           </tr>
         </thead>
         <tbody>
-          {bundles.map((bundle) => {
+          {bundles.map(bundle => {
             return (
               <tr>
                 <td>{bundle.bundleName}</td>
                 <td>
-                  {bundle.bundleProducts.map((bp) => {
+                  {bundle.bundleProducts.map(bp => {
                     return <h6>{bp.product.productName}</h6>;
                   })}
                 </td>
                 <td>{bundle.bundleType}</td>
                 <td>
-                  <Button variant="info">Update</Button>
+                  <Button
+                    variant="info"
+                    onClick={() => {
+                      props.history.push({
+                        pathname: "/updatebundle",
+                        id: bundle.bundleId
+                      });
+                    }}
+                  >
+                    Update
+                  </Button>
                 </td>
                 <td>
                   <Button

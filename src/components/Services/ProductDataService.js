@@ -30,6 +30,14 @@ class ProductDataService {
   updateProductPrice = price => {
     return axios.put(`${BASE_URL}/product/price`, price);
   };
+
+  updateProductService = proServ => {
+    return axios.put(`${BASE_URL}/product/service`, proServ);
+  };
+
+  deleteProductService = id => {
+    return axios.delete(`${BASE_URL}/product/service/${id}`);
+  };
 }
 
 export default new ProductDataService();

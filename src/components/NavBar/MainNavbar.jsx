@@ -23,34 +23,52 @@ import HomeContents from "../HomeContents/HomeContents";
 import UpdateProductService from "../UpdateProduct/UpdateProductService/UpdateProductService";
 import UpdateAdditionalPrice from "../UpdateProduct/UpdateAdditionalPrice/UpdateAdditionalPrice";
 
+//icons
+import UpdatePlan from "../UpdatePlan/UpdatePlan";
+import UpdateBundle from "../UpdateBundle/UpdateBundle";
+import serviceIcon from "../NavBar/icons/maintenance.svg";
+import productIcon from "../NavBar/icons/delivery-box.svg";
+import bundleIcon from "../NavBar/icons/hosting.svg";
+import planIcon from "../NavBar/icons/planning.svg";
+import productsIcon from "../NavBar/icons/stack.svg";
+import addIcon from "../NavBar/icons/add.svg";
+import putIcon from "../NavBar/icons/put-in-box.svg";
+
 const navs = [
   {
     url: "/services",
-    name: "services"
+    name: "services",
+    icon: serviceIcon
   },
   {
     url: "/addproduct",
-    name: "Add Product"
+    name: "Add Product",
+    icon: productIcon
   },
   {
     url: "/products",
-    name: "Products"
+    name: "Products",
+    icon: productsIcon
   },
   {
     url: "/plans",
-    name: "Add plan"
+    name: "Add plan",
+    icon: putIcon
   },
   {
     url: "/allplans",
-    name: "All plans"
+    name: "All plans",
+    icon: planIcon
   },
   {
     url: "/bundles",
-    name: "Make Bundle"
+    name: "Make Bundle",
+    icon: putIcon
   },
   {
     url: "/allbundles",
-    name: "All Bundles"
+    name: "All Bundles",
+    icon: bundleIcon
   }
 ];
 
@@ -110,9 +128,11 @@ const MainNavbar = props => {
         </Navbar>
         <div className={sidenavstate.style}>
           <ul>
-            {navs.map(({ url, name }) => (
-              <li key={name} >
+            {navs.map(({ url, name, icon }) => (
+              <li key={name}>
                 <Link className="nli" to={url}>
+                  <img className="menuicons" src={icon}></img>
+                  &emsp;
                   {name}
                 </Link>
               </li>
@@ -132,6 +152,8 @@ const MainNavbar = props => {
       <Route path="/updateproduct" component={UpdateProduct}></Route>
       <Route path="/updateproduct" component={UpdateProductService}></Route>
       <Route path="/updateproduct" component={UpdateAdditionalPrice}></Route>
+      <Route path="/updateplan" component={UpdatePlan}></Route>
+      <Route path="/updatebundle" component={UpdateBundle}></Route>
     </Router>
   );
 };

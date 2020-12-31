@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import PlanDataService from "../Services/PlanDataService";
 import { Alert, Table, Button } from "react-bootstrap";
 
-const AllPlans = (props) => {
+const AllPlans = props => {
   const [plans, setPlans] = useState([]);
   const [alert, setAlert] = useState();
 
   useEffect(() => {
     PlanDataService.getAllPlans()
-      .then((res) => {
+      .then(res => {
         if (!res.data.error) {
           setPlans(res.data.response);
           console.log(plans);
         }
       })
-      .catch((res) => {
+      .catch(res => {
         if (res.response != undefined) {
           setAlert(
             <Alert variant="danger">{res.response.data.response}</Alert>
@@ -23,14 +23,14 @@ const AllPlans = (props) => {
       });
   }, [alert]);
 
-  const deletePlan = (id) => {
+  const deletePlan = id => {
     PlanDataService.deletePlanById(id)
-      .then((res) => {
+      .then(res => {
         if (!res.data.error) {
           setAlert(<Alert variant="success">Plan Deleted Successfully</Alert>);
         }
       })
-      .catch((res) => {
+      .catch(res => {
         if (res.response != undefined) {
           setAlert(
             <Alert variant="danger">{res.response.data.response}</Alert>
@@ -61,7 +61,7 @@ const AllPlans = (props) => {
           </tr>
         </thead>
         <tbody>
-          {plans.map((plan) => {
+          {plans.map(plan => {
             return (
               <tr key={plan.planId}>
                 <td>{plan.planId}</td>
@@ -71,7 +71,17 @@ const AllPlans = (props) => {
                   {plan.product.productName} @ Rs.{plan.product.price.price}
                 </td>
                 <td>
-                  <Button variant="info">Update</Button>
+                  <Button
+                    variant="info"
+                    onClick={() => {
+                      props.history.push({
+                        pathname: "/updateplan",
+                        id: plan.planId
+                      });
+                    }}
+                  >
+                    Update
+                  </Button>
                 </td>
                 <td>
                   <Button

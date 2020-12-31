@@ -8,7 +8,7 @@
   .subt {
     font-size: medium;
     font-style: italic;
-    color: #04471c !important;
+    color: white !important;
   
     /* font-family: "Courier New", Courier, monospace; */
   }
@@ -19,7 +19,7 @@
 
   .maint {
     font-size: 25pt;
-    color: #04471c !important;
+    color:white !important;
     /* margin-left: 20px; */
     /* font-family: "Courier New", Courier, monospace; */
   }
@@ -40,7 +40,7 @@
     background: #FF6347;
     height: 150vh;
     overflow: auto;
-    width: 300px;
+    width: 250px;
     opacity: 0;
     position: absolute;
     visibility: hidden;
@@ -48,6 +48,11 @@
     transform: translateX(-50%);
     z-index: 1;
     border: 1px solid white;
+  }
+
+  .menuicons{
+    height: 40px;
+    width: 40px
   }
   
   a {
@@ -63,7 +68,7 @@
   }
   
   .nli {
-    color: white !important;
+    color: #000F08 !important;
     font-size: 20px;
     border-bottom: 1px solid #04471c;
     transition: all 0.25s ease;
@@ -75,7 +80,7 @@
   .nli:hover {
     opacity: 0.8;
     transition: all 0.25s ease;
-    background: #6E6362;
+    background: #F9F7F3;
     cursor: pointer;
   }
   

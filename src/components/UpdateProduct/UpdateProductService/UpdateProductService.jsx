@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import productDataService from "/home/mv/Desktop/onebillpricing_ui_new/src/components/Services/ProductDataService";
-import serviceDataService from "/home/mv/Desktop/onebillpricing_ui_new/src/components/Services/ServiceDataService.js";
+import productDataService from "/home/onebill/Desktop/onebill_pricing_ui_new/onebill_pricing_ui/src/components/Services/ProductDataService.js";
+import serviceDataService from "/home/onebill/Desktop/onebill_pricing_ui_new/onebill_pricing_ui/src/components/Services/ServiceDataService.js";
 
 import { Alert, Table, Button, Form, Col } from "react-bootstrap";
 
@@ -33,15 +33,10 @@ const UpdateProductService = props => {
         setAlert(<Alert variant="danger">Unable to fetch the product</Alert>);
       });
 
-    serviceDataService
-      .getAllServices(res => {
-        console.log(res.data.response);
-
-        setServices(res.data.response);
-      })
-      .catch(res => {
-        console.log("Unable to fetch services");
-      });
+    serviceDataService.getAllServices().then(res => {
+      console.log(res.data.response);
+      setServices(res.data.response)
+    });
   }, []);
 
   const deleteService = id => {
@@ -99,6 +94,7 @@ const UpdateProductService = props => {
             <th>Product Service id</th>
             <th>Service Name</th>
             <th>Service Price</th>
+            <th>Free Units</th>
             <th>Update</th>
             <th>Delete</th>
           </tr>
@@ -113,6 +109,12 @@ const UpdateProductService = props => {
                   <Form.Control
                     type="tel"
                     defaultValue={serv.servicePrice}
+                  ></Form.Control>
+                </td>
+                <td>
+                  <Form.Control
+                    type="tel"
+                    defaultValue={serv.freeUnits}
                   ></Form.Control>
                 </td>
                 <td>
