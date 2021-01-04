@@ -1,0 +1,42 @@
+.icon {
+  width: 35px;
+  height: 5px;
+  background-color: white;
+  margin: 6px;
+}
+
+.nav {
+  position: fixed;
+  top: 0%;
+  width: 100%;
+  z-index: 2;
+}
+
+.sidenav {
+  width: 200px;
+  height: 150vh;
+  border: 1px solid white;
+  margin-top: 55px;
+  visibility: hidden;
+  transition: all 200ms linear;
+  transform: translateX(-50%);
+  overflow: auto;
+  z-index: 1;
+}
+
+.sidenav li {
+  padding: 20px;
+  color: white;
+  border: 1px solid white;
+}
+
+.sidenav li:hover {
+  background-color: white;
+  color: #9400d3;
+}
+
+.active {
+  visibility: visible;
+  transition: all 200ms linear;
+  transform: translateX(0);
+}

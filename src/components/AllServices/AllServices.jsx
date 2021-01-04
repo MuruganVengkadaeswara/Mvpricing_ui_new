@@ -41,7 +41,7 @@ const AllServices = (props) => {
   return (
     <div className="col-md-6 offset-md-3 mt-5 card card-body">
       {alert}
-      <Table responsive striped bordered>
+      <Table responsive striped bordered data-testid="tablemain">
         <thead>
           <tr>
             <th>
