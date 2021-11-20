@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import productDataService from "/home/onebill/Desktop/onebill_pricing_ui_new/onebill_pricing_ui/src/components/Services/ProductDataService.js";
+import productDataService from "../../Services/ProductDataService.js";
 import { Alert, Table, Button } from "react-bootstrap";
 
 const UpdateAdditionalPrice = props => {

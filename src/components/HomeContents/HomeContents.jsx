@@ -6,7 +6,7 @@ const HomeContents = props => {
     <div className="col-md-8 offset-md-2 mt-5">
       <Jumbotron fluid>
         <Container>
-          <h1>Welcome to OneBill Pricing</h1>
+          <h1>Welcome to MV Pricing</h1>
           <hr>
           </hr>
           <p>

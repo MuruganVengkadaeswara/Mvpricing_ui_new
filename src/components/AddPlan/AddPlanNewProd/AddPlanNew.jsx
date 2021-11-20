@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Col, Alert } from "react-bootstrap";
-import serviceDataService from "/home/onebill/Desktop/onebill_pricing_ui_new/onebill_pricing_ui/src/components/Services/ServiceDataService.js";
-import planDataService from "/home/onebill/Desktop/onebill_pricing_ui_new/onebill_pricing_ui/src/components/Services/PlanDataService.js";
+import serviceDataService from "../../Services/ServiceDataService.js";
+import planDataService from "../../Services/PlanDataService.js";
 
 const AddPlanNew = props => {
   const [services, setServices] = useState([]);

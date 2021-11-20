@@ -54,9 +54,9 @@ function App() {
 
   return (
     <div>
-      {/* <MainNavBar /> */}
       <Router>
-        <CustomSideNav navProps={navProps} />
+      <MainNavBar />
+        {/* <CustomSideNav navProps={navProps} /> */}
       </Router>
     </div>
   );

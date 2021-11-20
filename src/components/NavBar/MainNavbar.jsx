@@ -113,7 +113,7 @@ const MainNavbar = props => {
               <div className="offset-md-3">
                 <Link to="/">
                   <Navbar.Brand>
-                    <strong className="maint">Onebill</strong>
+                    <strong className="maint">MV</strong>
                     &nbsp;
                     <span className="subt d-none d-sm-block">
                       (pricing solutions)

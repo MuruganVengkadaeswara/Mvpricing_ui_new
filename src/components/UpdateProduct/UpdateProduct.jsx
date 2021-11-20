@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ProductDataService from "../Services/ProductDataService";
+import ProductDataService from "../Services/ProductDataService.js";
 import { Tab, Table, Form, Button, Alert } from "react-bootstrap";
 
 const UpdateProduct = props => {
